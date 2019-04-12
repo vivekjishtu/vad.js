@@ -8,6 +8,8 @@
 <body>
 <script type="text/javascript" src="lib/vad.js"></script>
 <script type="text/javascript">
+  
+  var audioContext; 
   // Define function called by getUserMedia 
   function startUserMedia(stream) {
     // Create MediaStreamAudioSourceNode
@@ -27,7 +29,7 @@
   function startAudioContext() {
     // Create AudioContext
     window.AudioContext = window.AudioContext || window.webkitAudioContext;
-    var audioContext = new AudioContext();
+    audioContext = new AudioContext();
 
     // Ask for audio device
     navigator.getUserMedia = navigator.getUserMedia || 
