@@ -1,5 +1,6 @@
 # Voice activity detection in Javascript
 
+Demo https://vivekjishtu.github.io/vad.js/
 
 __vad.js__ is a small Javascript library for voice activity detection.
 
