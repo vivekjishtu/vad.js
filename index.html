@@ -8,10 +8,6 @@
 <body>
 <script type="text/javascript" src="lib/vad.js"></script>
 <script type="text/javascript">
-  // Create AudioContext
-  window.AudioContext = window.AudioContext || window.webkitAudioContext;
-  var audioContext = new AudioContext();
-
   // Define function called by getUserMedia 
   function startUserMedia(stream) {
     // Create MediaStreamAudioSourceNode
@@ -28,13 +24,27 @@
     var vad = new VAD(options);
   }
 
-  // Ask for audio device
-  navigator.getUserMedia = navigator.getUserMedia || 
-                           navigator.mozGetUserMedia || 
-                           navigator.webkitGetUserMedia;
-  navigator.getUserMedia({audio: true}, startUserMedia, function(e) {
-          console.log("No live audio input in this browser: " + e);
-  });
+  function startAudioContext() {
+    // Create AudioContext
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    var audioContext = new AudioContext();
+
+    // Ask for audio device
+    navigator.getUserMedia = navigator.getUserMedia || 
+                             navigator.mozGetUserMedia || 
+                             navigator.webkitGetUserMedia;
+    navigator.getUserMedia({audio: true}, startUserMedia, function(e) {
+            console.log("No live audio input in this browser: " + e);
+    });
+  }
+  
+  window.onload = function() {
+    document.getElementById("btnStart").onclick = function() {
+      startAudioContext();
+    }
+  }
 </script>
 </body>
+  
+  <button id="btnStart">Start</button>
 </html>
